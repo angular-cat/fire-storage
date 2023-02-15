@@ -1,0 +1,21 @@
+<div class="row g-0">
+    <div class="col-md-4">
+        <a href="{{ imageFile.imgURL }}">
+            <img src="{{ imageFile.imgURL }}" class="img-fluid rounded-start"
+                 alt="{{ imageFile.imgDescription }}"
+                 title="{{ imageFile.imgDescription }}"></a>
+    </div>
+    <div class="col-md-6">
+        <div class="card-body">
+            <h4 class="card-title">{{ imageFile.imgDescription }}</h4>
+            <p class="card-text">{{ imageFile.imgName }} </p>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="text-center py-3 pt-md-5">
+            <button type="button" class="btn btn-outline-danger"
+                    (click)="deleteFileUpload(imageFile)"><i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    </div>
+</div>

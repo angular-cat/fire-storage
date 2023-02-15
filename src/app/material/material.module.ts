@@ -11,6 +11,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatListModule} from "@angular/material/list";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const MAT_SNACK_BAR_GLOBAL_CONFIG: MatSnackBarConfig = {
     duration: 3500,
@@ -30,6 +32,8 @@ const MATERIAL_MODULES = [
     DragDropModule,
     MatSlideToggleModule,
     MatProgressBarModule,
+    MatListModule,
+    MatProgressSpinnerModule
 ];
 
 @NgModule({

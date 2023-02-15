@@ -4,7 +4,7 @@
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
+// have to load a single css imgFile for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
@@ -32,7 +32,7 @@ $fire-storage-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($fire-storage-theme);
 
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this imgFile, and also import other style files */
 
 html, body {
   height: 100%;
@@ -41,4 +41,12 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.toast-success {
+    background: #0da265;
+}
+
+.toast-error {
+    background: #DF294A;
 }

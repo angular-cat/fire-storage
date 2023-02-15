@@ -1,7 +1,81 @@
 <div class="container py-2">
-    <a href="/">
-        <img class="logo" src="assets/logo/angular-cat-logo.svg" alt="AngularCat Logo" title="AngularCat Logo">
-    </a>
-  <h2>{{title}}</h2>
-    <button mat-raised-button color="primary">Primary</button>
+    <div class="text-center text-md-start pt-1 pb-3">
+        <a href="/">
+            <img class="logo" src="assets/logo/angular-cat-logo.svg" alt="AngularCat Logo" title="AngularCat Logo">
+        </a>
+    </div>
+    <div class="row align-items-md-stretch g-3">
+        <div class="col-md-6">
+            <mat-card class="mat-elevation-z3">
+                <mat-card-header>
+                    <mat-card-title>Add image file</mat-card-title>
+                    <mat-card-subtitle>Add or remove a image file</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <input hidden (change)="selectFile($event)" #fileInput type="file" [(ngModel)]="fileName">
+                    <form *ngIf="selectedFile" [formGroup]="imageForm">
+                        <a class="link-secondary float-end" (click)="closeForm()">
+                            <mat-icon aria-hidden="false">close</mat-icon>
+                        </a>
+                        <mat-form-field class="full-width pt-4" appearance="fill">
+                            <mat-label>File name:</mat-label>
+                            <input matInput name="categoryName" type="text" value="{{this.selectedFile.name}}" disabled>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Image Description:</mat-label>
+                            <input class="lowercase" matInput formControlName="imgDescription" name="categoryName"
+                                   type="text"
+                                   placeholder="Image Description:" #imageDescription>
+                            <mat-hint align="end">
+                                {{imageDescription.value.length}} / 15
+                            </mat-hint>
+                            <mat-error *ngIf="imgDescription.errors?.['required']">
+                                Please enter a category name.
+                            </mat-error>
+                            <mat-error *ngIf="imageDescription.value.length < 3">
+                                A minimum length of category name is 3 characters.
+                            </mat-error>
+                            <mat-error *ngIf="imageDescription.value.length > 15">
+                                A maximum length of category name is 15 characters.
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="text-center pb-3">
+                        <button *ngIf="!selectedFile" type="button" mat-raised-button color="accent"
+                                (click)="fileInput.click()"
+                                matTooltip="Choose a image file" matTooltipPosition="right">
+                            <i class="fa-solid fa-file-circle-plus"></i> Add file
+                        </button>
+                        <button *ngIf="selectedFile" type="submit" mat-raised-button color="primary" (click)="upload()"
+                                matTooltip="Add file" matTooltipPosition="below"
+                                [disabled]="imageForm.invalid">
+                            <i class="fa-solid fa-upload"></i> Upload
+                        </button>
+                    </div>
+                </mat-card-actions>
+                <div *ngIf="isProgress">
+                    <p class="text-sm-center">Load: {{percentage}} %</p>
+                    <mat-progress-bar mode="determinate" value="{{ percentage }}"></mat-progress-bar>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<div class="container py-2">
+    <div class="col-md-6" *ngIf="isLoading; else content">
+        <div class="d-flex justify-content-center">
+            <mat-spinner color="accent"></mat-spinner>
+        </div>
+    </div>
+    <ng-template #content>
+        <div class="col-md-6">
+            <div class="card mb-2 mat-elevation-z3" *ngFor="let image of fileUploads">
+                <app-img-card [imageFile]="image"></app-img-card>
+            </div>
+        </div>
+    </ng-template>
+    <!--    <pre>{{fileUploads | json}}</pre>-->
 </div>
